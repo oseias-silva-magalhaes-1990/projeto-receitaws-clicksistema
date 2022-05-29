@@ -57,46 +57,56 @@ function buscaDados(){
   
   //Realiza o controle das Linhas
   sheet.getRange(1,16).setValue("Linha");  
-  if(sheet.getRange(1,17).getValue() != ""){//Verifica se a célula Q1 possui última linha preenchida
-    linha = parseInt(sheet.getRange(1,17).getValue());//Se a célula possui valor este é atribuido para a variável linha marcando a posiçã ode continuação
+  if(sheet.getRange(1,17).getValue() != ""){
+    linha = parseInt(sheet.getRange(1,17).getValue());
     sheet.getRange(1,17).setValue(linha);
   }else{
-    sheet.getRange(1,17).setValue(linha);//Caso esteja nula inicia-se pela linha 2 setada na variável linha nas **Definições Iniciais** 
+    sheet.getRange(1,17).setValue(linha);
   }
   
-  //Chamada de Função para a Definição de Cabeçalho da Planilha
+  //Aplica o Cabeçalho da Tabela
   aplicarHeaders();
   
   //Realiza a busca e chama a função de preenchimento relacionada
-  while(linha < 110557){//Quantidade de CNPJ desejada no máximo até 114000 por Planilha
+  while(cont <= 30 && linha < 110557){
     
-    cnpjVar = sheet.getRange(linha,1).getValue();//Atribui para a variável cnpjVar o CNPJ que se deseja buscar na coluna A1...An
+    cnpjVar = sheet.getRange(linha,1).getValue();
     
     //1º Tentativa API Receita WS
-    var json1 = buscarObjJson(url_receita + cnpjVar);//Realiza tentatia de busca passando o parâmetro da url_receita + CNPJ para a função buscarObjJson()
+    var json1 = buscarObjJson(url_receita + cnpjVar);
     
-    Logger.log("Pri Tentativa");//Log de Execução para a 1ª tentativa
-    Logger.log(url_receita + cnpjVar); //Mostra Query para busca
+    Logger.log("Pri Tentativa");
+    Logger.log(url_receita + cnpjVar);
 
-    if(json1.cnpj){//Se encontrou um cnpj
-      aplicarValoresReceita(json1, linha);//Aplica os valores na planilha
-      linha++;//Incrementa a Linha
-    }else{//Caso não encontre os dados do CNPJ buscado
+    if(json1 != 0){
+      aplicarValoresReceita(json1, linha);
+      linha++;
+    }else{
       
       //2º Tentativa API ClickSistema
-      var json2 = buscarObjJson(url_click + cnpjVar + "&nome=")[0];//Configuração de busca para os dados da API Click Sistema
+      var json2 = buscarObjJson(url_click + cnpjVar + "&nome=")[0];
      
-      Logger.log("Seg Tentativa");//Log de Execução para a 2ª tentativa
-      Logger.log(url_click + cnpjVar + "&nome=");//Mostra Query para busca
+      Logger.log("Seg Tentativa");
+      Logger.log(url_click + cnpjVar + "&nome=");
       
-      if(json2.cnpj){//Se encontrou os dados do CNPJ buscado
-        aplicarValoresClick(json2, linha);//Aplica os valores encontrados na planilha
-        linha++;//Incrementa a Linha
+      if(json2 != null){
+        aplicarValoresClick(json2, linha);
+        linha++;
       }
-      //Caso não encontre o laço é repetido novamente até que sejam definidos os dados para os CNPJs buscados
+      
+      if(json1 == 0 && json2 == null){
+        cont++;
+        Logger.log(cont);
+      }
+      
+      if(cont == 29){
+        sheet.deleteRow(linha);
+        cont=0;
+      }
+      
     }
     
-    sheet.getRange(1,17).setValue(linha);//Após o preenchimento insere-se uma nova linha na célula Q1 que marca a posição da última linha preenchida
+    sheet.getRange(1,17).setValue(linha);
     
   }
   
