@@ -3,7 +3,7 @@ Baixar dados de CNPJ utilizando duas APIs gratuitas e com dados públicos.
 
 Utilizando dados de CNPJ disponibilizados pelo Portal Transparência para os favorecidos em 2021 no link abaixo:
 
-Link: https://www.portaltransparencia.gov.br/download-de-dados/favorecidos-pj
+**Link:** https://www.portaltransparencia.gov.br/download-de-dados/favorecidos-pj
 
 Essa lista conta com 912.476 de CNPJ nacionais.
 Download: https://drive.google.com/drive/folders/1UIr-3_N7zwMKbqZCLCGBQrrCbpW88X7A?usp=sharing
@@ -15,7 +15,7 @@ Este trabalho propõe solução simples mas muito eficiente, utilizando **AppScr
 ## Apps Script
 O Google Apps Script é uma plataforma de desenvolvimento rápido de aplicativos que facilita e agiliza a criação de aplicativos de negócios que se integram ao Google Workspace. Você escreve código em JavaScript moderno e tem acesso a bibliotecas integradas para aplicativos favoritos do Google Workspace, como Gmail, Agenda, Drive e muito mais. Não há nada para instalar—nós fornecemos a você um editor de código diretamente no seu navegador e seus scripts são executados nos servidores do Google.
 
-Conheça: https://developers.google.com/apps-script/overview
+**Conheça:** https://developers.google.com/apps-script/overview
 
 ## Planilhas Google
 O Planilhas foi criado para atender às necessidades das organizações que precisam de agilidade. Com os recursos de inteligência artificial, você acessa os insights certos para tomar decisões empresariais importantes. A arquitetura baseada na nuvem permite que você colabore com quem quiser, a qualquer hora e em qualquer lugar. A compatibilidade com sistemas externos, inclusive o Microsoft Office, simplifica o trabalho com várias origens de dados. E como o Planilhas é integrado à infraestrutura do Google, você tem toda a liberdade para criar sem comprometer a segurança das suas informações.
@@ -27,11 +27,11 @@ O sistema é composto pelos seguintes componentes:
  - Uma fila;
  - Processos que recuperam informações da Receita Federal;
 Ao realizar a consulta de um CNPJ através da API, é primeiro verificado se este existe no banco de dados. Em caso positivo, estes dados são retornados. Em caso negativo, a requisição é encaminhada para uma fila de onde alguns processos recuperam sua requisição e realizam a consulta no site da Receita Federal. Assim que a consulta é realizada com sucesso os dados são atualizados no banco de dados local e sua requisição é respondida.
-Link: https://receitaws.com.br/faq
+**Link:** https://receitaws.com.br/faq
 
 ## Click Sistema
 Numa iniciativa própria criamos a API CNPJ. Com ela a base de dados disponibilizada pelo governo é apresentada num formato mais adequado para consultas e programadores. A base é automaticamente atualizada a cada 4 meses e o resultado pode ser retornado graficamente na web ou no formato JSON, mais adequado para ser trabalhado no server side.
-Link: https://clicksistema.com.br/
+**Link:** https://clicksistema.com.br/
 
 ## Aplicação
 Embora a lista de favorecidos forneça dados recentes, neste projeto preferi realizar uma busca ainda mais atual, mesmo com um custo computacional maior.
