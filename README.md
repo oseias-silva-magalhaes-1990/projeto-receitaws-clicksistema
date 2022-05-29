@@ -29,7 +29,7 @@ O sistema é composto pelos seguintes componentes:
 Ao realizar a consulta de um CNPJ através da API, é primeiro verificado se este existe no banco de dados. Em caso positivo, estes dados são retornados. Em caso negativo, a requisição é encaminhada para uma fila de onde alguns processos recuperam sua requisição e realizam a consulta no site da Receita Federal. Assim que a consulta é realizada com sucesso os dados são atualizados no banco de dados local e sua requisição é respondida.
 Link: https://receitaws.com.br/faq
 
-##Click Sistema
+## Click Sistema
 Numa iniciativa própria criamos a API CNPJ. Com ela a base de dados disponibilizada pelo governo é apresentada num formato mais adequado para consultas e programadores. A base é automaticamente atualizada a cada 4 meses e o resultado pode ser retornado graficamente na web ou no formato JSON, mais adequado para ser trabalhado no server side.
 Link: https://clicksistema.com.br/
 
@@ -283,15 +283,15 @@ function formataCep(val){
 }
 ```
 ## Siga os passos abaixo:
-1º Obtenha a lista de CNPJ que deseja buscar os dados
-2º Cole-os na Planilha do Google
-3º Dentro do Google Planilhas abra **Extensões > Apps Scrript**, copie e cole o código
-4º Dentro do Apps Script clique em **Acionadores do projeto atual** e defina
-  4.1 - Escolha a função que será executada: buscaDados
-  4.2 - Implantação a ser executada: Teste
-  4.3 - Selecione a origem do evento: Baseada no Tempo
-  4.4 - Selecione o tipo de acionador com base no tempo: Contador de minutos
-  4.5 - Selecione o intervalo de Minutos: 30 minutos
+1º Obtenha a lista de CNPJ que deseja buscar os dados<br/>
+2º Cole-os na Planilha do Google<br/>
+3º Dentro do Google Planilhas abra **Extensões > Apps Scrript**, copie e cole o código<br/>
+4º Dentro do Apps Script clique em **Acionadores do projeto atual** e defina<br/>
+  4.1 - Escolha a função que será executada: buscaDados<br/>
+  4.2 - Implantação a ser executada: Teste<br/>
+  4.3 - Selecione a origem do evento: Baseada no Tempo<br/>
+  4.4 - Selecione o tipo de acionador com base no tempo: Contador de minutos<br/>
+  4.5 - Selecione o intervalo de Minutos: 30 minutos<br/>
   
 Pronto!
 Basta esperar e ver sua busca de dados sendo realizada.
