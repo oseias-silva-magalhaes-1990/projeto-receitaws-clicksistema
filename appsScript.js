@@ -1,6 +1,6 @@
 /*
+*Projeto: Projeto Receita WS + Click Sistema
 *Autor: Oséias Magalhães
-*Projeto: projeto-receitaws-clicksistema
 */
 
 /*
@@ -18,6 +18,7 @@ ATIVA   | 2
   //var url = "";
   var linha = 2;
   var cnpjVar;
+  var cont = 0;
 
   
 function buscaDados(){
@@ -37,7 +38,7 @@ function buscaDados(){
   aplicarHeaders();
   
   //Realiza a busca e chama a função de preenchimento relacionada
-  while(linha < 110557){
+  while(cont <= 30 && linha < 110557){
     
     cnpjVar = sheet.getRange(linha,1).getValue();
     
@@ -47,7 +48,7 @@ function buscaDados(){
     Logger.log("Pri Tentativa");
     Logger.log(url_receita + cnpjVar);
 
-    if(json1.cnpj){
+    if(json1 != 0){
       aplicarValoresReceita(json1, linha);
       linha++;
     }else{
@@ -58,11 +59,21 @@ function buscaDados(){
       Logger.log("Seg Tentativa");
       Logger.log(url_click + cnpjVar + "&nome=");
       
-      if(json2.cnpj){
+      if(json2 != null){
         aplicarValoresClick(json2, linha);
         linha++;
-        
       }
+      
+      if(json1 == 0 && json2 == null){
+        cont++;
+        Logger.log(cont);
+      }
+      
+      if(cont == 29){
+        sheet.deleteRow(linha);
+        cont=0;
+      }
+      
     }
     
     sheet.getRange(1,17).setValue(linha);
@@ -80,7 +91,7 @@ function buscarObjJson(url){
     return json;
   }
   catch(err){
-    return "Erro";
+    return 0;
   }
 }
 
