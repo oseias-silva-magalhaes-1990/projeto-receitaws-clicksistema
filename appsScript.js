@@ -190,7 +190,7 @@ function aplicarValoresClick(json, linha){
           sheet.getRange(linha, col).setValue(json.fantasia);
           break;
         case 7:
-          sheet.getRange(linha, col).setValue(json.cnae_fiscal);
+          sheet.getRange(linha, col).setValue(buscarCnaeFiscal(json.cnae_fiscal));
           break;
         case 8:
           sheet.getRange(linha, col).setValue(json.bairro);
@@ -239,6 +239,15 @@ function verificaMatriz(val){
     return"MATRIZ";
   }
   return "FILIAL";
+}
+
+function buscarCnaeFiscal(codigo){
+  var retornoJson = buscarObjJson("https://servicodados.ibge.gov.br/api/v2/cnae/subclasses/"+codigo)[0];//API IBGE
+  if(retornoJson != 0){
+    return retornoJson.descricao; 
+  }else{
+    return null;
+  }
 }
 
 function formatarInicio(val){
