@@ -19,7 +19,7 @@ ATIVA   | 2
   var linha = 2;
   var cnpjVar;
   var cont = 0;
-
+  var qtdCnpj = 108963;//Quantidade de CNPJ que se deseja buscar
   
 function buscaDados(){
   //listarCnpjs(); //Chama gerador de cnpj aleatório
@@ -38,7 +38,7 @@ function buscaDados(){
   aplicarHeaders();
   
   //Realiza a busca e chama a função de preenchimento relacionada
-  while(cont <= 30 && linha < 110557){
+  while(cont <= 30 && linha < qtdCnpj){
     
     cnpjVar = sheet.getRange(linha,1).getValue();
     
